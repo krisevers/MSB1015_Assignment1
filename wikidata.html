@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<!-- the header had information we will not see in the browser window -->
+<head>
+   <script src="https://cdn.rawgit.com/maxlath/wikidata-sdk/master/dist/wikidata-sdk.js"></script>
+</head>
+
+<!-- the next section is what we do get to see in the browser window -->
+<body>
+  <pre id="output"></pre>
+  <script>
+    query = "SELECT ?compound ?cas WHERE { ?compound wdt:P231 ?cas }"
+
+    fetch(
+      wdk.sparqlQuery(query)
+    ).then( response => response.json()
+    ).then( wdk.simplify.sparqlResults
+    ).then(
+      function (response) {
+        document.getElementById('output').innerHTML =
+          JSON.stringify(response, undefined, 2);
+      }
+    )
+  </script>
+</body>
+
+</html>
