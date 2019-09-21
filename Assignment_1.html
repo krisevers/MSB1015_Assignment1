@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Initialize a global WBK function -->
+<!-- initialize a global WBK function -->
 <script src="https://cdn.rawgit.com/maxlath/wikidata-sdk/dist/dist/wikibase-sdk.min.js"></script>
-<!-- Initialize a global wdk object using the WBK object -->
+<!-- initialize a global wdk object using the WBK object -->
 <script src="https://cdn.rawgit.com/maxlath/wikidata-sdk/dist/dist/wikidata-sdk.min.js"></script>
-<!-- Initialize the d3js library -->
+<!-- initialize the d3js library -->
 <script src="https://d3js.org/d3.v4.min.js"></script>
+
+<!-- title of the html page -->
+<title>What are the number of proteins per species?</title>
 
 </head>
 
 <body>
+  <!-- header of the page -->
+  <center>
+  <header>
+    <h1 style = "font-family:Helvetica;font-size:30px;font-style:bold;">
+	What are the number of proteins per species?
+	</h1>
+    <h3 style = "font-family:Helvetica;font-size:30px;font-style:bold;">
+	Scroll down for the answer!</h3>
+  </header>
+  </center>
+
   <pre id="output"></pre>
-	
+  
+  <center>  
   <script>
   
-  
+    <!-- query string definition -->
     query = `SELECT ?taxon ?taxonLabel ?count
 			WITH {
 				SELECT ?taxon (COUNT(DISTINCT ?proteins) AS ?count) WHERE {
@@ -31,33 +46,35 @@
 			  }
 			}`
     
+	<!-- fetching the sparql query -->
 	fetch(
+	  <!-- sparql request -->
       wdk.sparqlQuery(query)
+	  <!-- transform response to .json -->
     ).then( response => response.json()
+	  <!-- simplify .json response -->
     ).then( wdk.simplify.sparqlResults
     ).then(
+	  <!-- function for further processing of the data -->
       function (response) {
+	    <!-- data preparation for d3js visualization -->
         DataJSON = response;
         DataSTRING = JSON.stringify(response, undefined, 2);
         dataset = {};
         dataset.children = DataJSON.map(function(item) { return { "Taxon": item.taxon.label , "Count": item.count } });
-
-        var diameter = 800;
+        <!-- creating the d3js object --> 
+		var diameter = 1500;
         var color = d3.scaleOrdinal(d3.schemeCategory20);
-
         var bubble = d3.pack(dataset)
             .size([diameter, diameter])
             .padding(1.5);
-
         var svg = d3.select("body")
             .append("svg")
             .attr("width", diameter)
             .attr("height", diameter)
             .attr("class", "bubble");
-
         var nodes = d3.hierarchy(dataset)
             .sum(function(d) { return d.Count; });
-
         var node = svg.selectAll(".node")
             .data(bubble(nodes).descendants())
             .enter()
@@ -69,12 +86,10 @@
             .attr("transform", function(d) {
                 return "translate(" + d.x + "," + d.y + ")";
             });
-
         node.append("title")
             .text(function(d) {
                 return d.Taxon + ": " + d.Count;
             });
-
         node.append("circle")
             .attr("r", function(d) {
                 return d.r;
@@ -82,38 +97,40 @@
             .style("fill", function(d,i) {
                 return color(i);
             });
-
         node.append("text")
             .attr("dy", ".2em")
             .style("text-anchor", "middle")
             .text(function(d) {
-                return d.data.Taxon.substring(0, d.r / 3);
+                return d.data.Taxon.substring(0, d.r / 2);
             })
-            .attr("font-family", "sans-serif")
+            .attr("font-family", "helvetica")
             .attr("font-size", function(d){
-                return d.r/3;
+                return d.r/6;
             })
             .attr("fill", "white");
-
         node.append("text")
             .attr("dy", "1.3em")
             .style("text-anchor", "middle")
             .text(function(d) {
                 return d.data.Count;
             })
-            .attr("font-family",  "Gill Sans", "Gill Sans MT")
+            .attr("font-family", "helvetica")
             .attr("font-size", function(d){
                 return d.r/5;
             })
             .attr("fill", "white");
-
         d3.select(self.frameElement)
             .style("height", diameter + "px");
 			}
     )
 	
   </script>
-
+  </center>
+  
+  <!-- copyright footer -->
+  <footer>
+        <small>&copy; Copyright 2019, Kris Evers</small>
+  </footer>
 </body>
 
 </html>
