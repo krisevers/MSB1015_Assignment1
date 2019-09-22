@@ -2,7 +2,9 @@
 This project answers the question 'What are the number of proteins per species?'. SPARQL query language is used to request the information 
 needed to answer the question from the Wikidata database. A HTML file is created that is readable by browser software and uses a D3js 
 visualization template of a bubble plot to visualize the results.
-
+### Contribution
+Contributors should be willing to be involved in the project and understand the goal and the future steps of the project.
+### Execution
 RUN Assignment_1.html IN BROWSER SOFTWARE.
 
 ## Pseudocode
