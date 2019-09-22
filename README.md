@@ -15,5 +15,5 @@ RUN Assignment_1.html IN BROWSER SOFTWARE.
   - Creation of D3js object as .svg
 
 ## Authors
-Egon Willighagen - provided the .html template and the sparql template.
-Kris Evers - produced the main body of the code for the sparql query and the visualization of the data.
+- Egon Willighagen - provided the .html template and the sparql template.
+- Kris Evers - produced the main body of the code for the sparql query and the visualization of the data.
