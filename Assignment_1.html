@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<!-- initialize a global WBK function -->
-<script src="https://cdn.rawgit.com/maxlath/wikidata-sdk/dist/dist/wikibase-sdk.min.js"></script>
-<!-- initialize a global wdk object using the WBK object -->
-<script src="https://cdn.rawgit.com/maxlath/wikidata-sdk/dist/dist/wikidata-sdk.min.js"></script>
-<!-- initialize the d3js library -->
-<script src="https://d3js.org/d3.v4.min.js"></script>
-
 <!-- title of the html page -->
 <title>What are the number of proteins per species?</title>
 
@@ -21,8 +11,17 @@
 	What are the number of proteins per species?
 	</h1>
     <h3 style = "font-family:Helvetica;font-size:25px;font-style:italic;letter-spacing: 0.1em;">
-	The answer is requested! Wait a second please.</h3>
+	The answer is requested! Wait a second please.
+	</h3>
   </header>
+  
+  <!-- explanation of the page and a legend -->
+  <p>
+  The answer to the above biological question is requested from the Wikidata database. <br> 
+  It will take a few moments before the query request and visualization is completed. <br>
+  The size of the bubbles is an indication of the number of proteins a species has. <br>
+  The first line of text in the bubbles is the name of the species and the second line is the number of proteins a species has.
+  </p>
   </center>
 
   <pre id="output"></pre>
