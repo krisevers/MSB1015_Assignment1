@@ -3,7 +3,7 @@ This project answers the question 'What are the number of proteins per species?'
 needed to answer the question from the Wikidata database. A HTML file is created that is readable by browser software and uses a D3js 
 visualization template of a bubble plot to visualize the results.
 ### Contribution
-Contributors should be willing to be involved in the project and understand the goal and the future steps of the project.
+Contributors are allowed if they are willing to be involved in the project and understand the goal and the future steps of the project.
 ### Execution
 RUN Assignment_1.html IN BROWSER SOFTWARE.
 
